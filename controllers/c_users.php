@@ -6,8 +6,6 @@
  * Time: 8:39 AM
  * To change this template use File | Settings | File Templates.
  */
-
-<?php
 class users_controller extends base_controller {
 
     public function __construct() {
