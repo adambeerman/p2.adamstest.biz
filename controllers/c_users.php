@@ -24,12 +24,15 @@ class users_controller extends base_controller {
 
     public function profile($user_name = NULL) {
 
-        if($user_name == NULL) {
-            echo "No user specified";
-        }
-        else {
-            echo "This is the profile for ".$user_name;
-        }
+        # Create a new View instance
+        # Do *not* include .php with the view name
+        $view = View::instance('v_users_profile');
+
+        # Pass information to the view instance
+        $view->user_name = $user_name;
+
+        # Render View
+        echo $view;
     }
 
 } # end of the class
