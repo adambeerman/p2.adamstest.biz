@@ -32,7 +32,7 @@ class users_controller extends base_controller {
         $view-> user_name = $user_name;
 
         #Render View
-        echo $view
+        echo $view;
 
         /* Old Code
         if($user_name == NULL) {
