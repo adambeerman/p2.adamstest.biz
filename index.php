@@ -31,5 +31,3 @@
     
 # Display environment details
 	require CORE_PATH."environment-details.php";
-	
-?>
