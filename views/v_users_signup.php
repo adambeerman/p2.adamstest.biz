@@ -1,19 +1,18 @@
+<h2>Sign Up</h2>
+
 <form method='POST' action='/users/p_signup'>
 
-    First Name<br>
-    <input type='text' name='first_name'>
-    <br><br>
-
-Last Name<br>
-    <input type='text' name='last_name'>
+    Name<br>
+    <input type='text' name='first_name' placeholder="First">
+    <input type='text' name='last_name' placeholder="Last">
     <br><br>
 
 Email<br>
-    <input type='text' name='email'>
+    <input type='text' name='email' placeholder="e-mail address">
     <br><br>
 
 Password<br>
-    <input type='password' name='password'>
+    <input type='password' name='password' placeholder="password">
     <br><br>
 
     <input type='submit' value='Sign up'>
