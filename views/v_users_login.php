@@ -2,13 +2,13 @@
 <form method='POST' action='/users/p_login'>
 
     Email<br>
-    <input type='text' name='email' placeholder="e-mail">
-
+    <label>
+        <input type='text' name='email' placeholder="e-mail">
+    </label>
     <br>
 
-Password<br>
+    Password<br>
     <input type='password' name='password' placeholder="password">
-
     <br>
 
     <?php if(isset($error)): ?>

@@ -9,7 +9,12 @@ class users_controller extends base_controller {
     }
 
     public function index() {
-        echo "This is the index page";
+
+    }
+
+    public function cookiemonster(){
+        setcookie("oatmeal", "yummy", strtotime('+1 year'), '/');
+        print_r($_COOKIE);
     }
 
     public function signup() {
@@ -42,7 +47,7 @@ class users_controller extends base_controller {
         # For now, just confirm they've signed up -
         # You should eventually make a proper View for this
         # [TO DO!!!]
-        echo 'You\'re signed up';
+        //echo 'You\'re signed up';
 
         // Redirect to login page?
         Router::redirect('/users/login.php');
@@ -75,12 +80,30 @@ class users_controller extends base_controller {
 
         # Search the db for this email and password
         # Retrieve the token if it's available
-        $q = "SELECT token
+
+        /*$q = "SELECT token
             FROM users
             WHERE email = '".$_POST['email']."'
             AND password = '".$_POST['password']."'";
 
+        $q = "SELECT token
+        FROM users
+        WHERE email = '".$_POST['email']."'
+        AND password = '".$_POST['password']."'";*/
+
+        $q = 'SELECT token
+            FROM users
+            WHERE email = "'.$_POST['email'].'"
+            AND password = "'.$_POST['password'].'"';
+
+        /*echo "q is <br>";
+        echo $q;
+        echo "<br>";*/
+
         $token = DB::instance(DB_NAME)->select_field($q);
+        /*echo "Display the token <br>";
+        echo $token;
+        echo "<br><br>";*/
 
         # If we didn't find a matching token in the database, it means login failed
         if(!$token) {
@@ -94,7 +117,8 @@ class users_controller extends base_controller {
             /*
             Store this token in a cookie using setcookie()
             */
-            setcookie("token", $token, strtotime('+1 year'), '/');
+            setcookie("token", $token, strtotime('+1 year'), '/', false);
+
             echo "LOGIN SUCCESSFUL <br />";
             echo "Display the token <br />";
             echo $_COOKIE["token"];
@@ -146,8 +170,10 @@ class users_controller extends base_controller {
     }
 
     public function redirect_test() {
-        $this->template->title   = "Redirect Test";
-        Router::redirect("/index");
+        echo phpinfo();
+
+        // $this->template->title   = "Redirect Test";
+        // Router::redirect("/index");
 
     }
 

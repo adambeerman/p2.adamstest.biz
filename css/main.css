@@ -2,3 +2,29 @@
 .error {
     color: red;
 }
+
+.logo {
+    font-size: 40px;
+    color: darkblue;
+    font-family: 'Lily Script One', cursive;
+    margin-left: 5px;
+
+}
+
+#menu {
+    background-color: lightgray;
+    border-bottom: 1px solid black;
+    margin: 0 auto;
+    font-family: 'Lily Script One', cursive;
+}
+
+#menu a {
+    margin: 5px;
+    text-decoration: none;
+}
+
+h3 {
+    margin: 0 auto;
+    margin-left: 5px;
+    font-family: times, serif;
+}
