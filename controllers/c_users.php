@@ -155,13 +155,14 @@ class users_controller extends base_controller {
 
         # Create a new View instance
         # Do *not* include .php with the view name
-        $view = View::instance('v_users_profile');
 
-        # Pass information to the view instance
-        $view->user_name = $user_name;
+        # Setup view
+        $this->template->content = View::instance('v_users_profile');
+        $this->template->title   = $this->user->first_name." ".$this->user->last_name;
 
-        # Render View
-        echo $view;
+        # Render template
+        echo $this->template;
+
     }
 
     public function redirect_test() {
