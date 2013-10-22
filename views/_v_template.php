@@ -24,7 +24,8 @@
     <div id='menu'>
 
 
-        <a href='/'> <span class = "logo"><?php echo APP_NAME ?></span></a>
+        <a href='/'><span class = "logo"><?php echo APP_NAME; ?></span></a>
+        <span class = "tagline"><?php echo APP_TAGLINE."<br>"; ?></span>
 
         <!-- Menu for users who are logged in -->
         <?php if($user): ?>
@@ -39,7 +40,6 @@
             <a href='/users/login'>[ Log in ]</a>
 
         <?php endif; ?>
-        <h3>what do you have to say?</h3>
 
     </div>
 

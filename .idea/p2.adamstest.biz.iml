@@ -4,26 +4,6 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="PHP">
-        <CLASSES>
-          <root url="file://$USER_HOME$/Desktop/xdebug" />
-        </CLASSES>
-        <SOURCES>
-          <root url="file://$USER_HOME$/Desktop/xdebug" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="PHARS">
-        <CLASSES>
-          <root url="phar://$USER_HOME$/Desktop/xdebug/tests/bug00886.phar" />
-        </CLASSES>
-        <SOURCES>
-          <root url="phar://$USER_HOME$/Desktop/xdebug/tests/bug00886.phar" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>
 

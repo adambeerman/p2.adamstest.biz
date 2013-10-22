@@ -9,12 +9,7 @@ class users_controller extends base_controller {
     }
 
     public function index() {
-
-    }
-
-    public function cookiemonster(){
-        setcookie("oatmeal", "yummy", strtotime('+1 year'), '/');
-        print_r($_COOKIE);
+        echo "WELCOME <br>";
     }
 
     public function signup() {
@@ -119,15 +114,15 @@ class users_controller extends base_controller {
             */
             setcookie("token", $token, strtotime('+1 year'), '/', false);
 
-            echo "LOGIN SUCCESSFUL <br />";
+            /*echo "LOGIN SUCCESSFUL <br />";
             echo "Display the token <br />";
-            echo $_COOKIE["token"];
+            echo $_COOKIE["token"];*/
 
             //Debug
-            echo "Cookie results";
+            /*echo "Cookie results";
             echo '<pre>';
             print_r($_COOKIE);
-            echo '</pre>';
+            echo '</pre>';*/
 
             # Send them to the main page - or wherever you want them to go
             Router::redirect('/');
@@ -137,8 +132,6 @@ class users_controller extends base_controller {
     }
 
     public function logout() {
-        echo "This is the logout page";
-
         # Generate and save a new token for next login
         $new_token = sha1(TOKEN_SALT.$this->user->email.Utils::generate_random_string());
 
@@ -151,6 +144,8 @@ class users_controller extends base_controller {
 
         # Delete their token cookie by setting it to a date in the past - effectively logging them out
         setcookie("token", "", strtotime('-1 year'), '/');
+
+        setcookie("just_logged_out", TRUE);
 
         # Send them back to the main index.
         Router::redirect("/");
