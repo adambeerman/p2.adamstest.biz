@@ -8,11 +8,7 @@
     color: darkblue;
     font-family: 'Lily Script One', cursive;
     margin-left: 5px;
-
-.tagline {
-    font-family: "Times New Roman",Georgia,Serif;
-}
-
+    text-align: center;
 }
 
 #menu {
@@ -21,11 +17,24 @@
     margin: 0 auto;
     font-family: 'Lily Script One', cursive;
     padding: 0;
+    text-align: center;
 }
 
 #menu a {
     margin: 5px;
     text-decoration: none;
+    font-family: "Times New Roman",Georgia,Serif;;
+}
+
+.tagline {
+    font-family: 'Lily Script One', cursive;
+    text-align: center;
+}
+
+#content {
+    background: white;
+    margin: 20px;
+    padding: 10px;
 }
 
 h3 {

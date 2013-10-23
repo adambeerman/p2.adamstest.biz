@@ -25,7 +25,7 @@
 
 
         <a href='/'><span class = "logo"><?php echo APP_NAME; ?></span></a>
-        <span class = "tagline"><?php echo APP_TAGLINE."<br>"; ?></span>
+        <br>
 
         <!-- Menu for users who are logged in -->
         <?php if($user): ?>
@@ -45,9 +45,12 @@
 
     </div>
 
-    <br>
+    <span class = "tagline"><?php echo APP_TAGLINE."<br>"; ?></span>
 
-    <?php if(isset($content)) echo $content; ?>
+    <div id = "content">
+        <?php if(isset($content)) echo $content; ?>
+    </div>
+
     <?php if(isset($client_files_body)) echo $client_files_body; ?>
 
 </body>
