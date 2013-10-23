@@ -45,7 +45,7 @@ class users_controller extends base_controller {
         //echo 'You\'re signed up';
 
         // Redirect to login page?
-        Router::redirect('/users/login.php');
+        Router::redirect('/users/login');
 
         // Dump the $_POST data to see what was submitted
         // print_r($_POST);
@@ -75,16 +75,6 @@ class users_controller extends base_controller {
 
         # Search the db for this email and password
         # Retrieve the token if it's available
-
-        /*$q = "SELECT token
-            FROM users
-            WHERE email = '".$_POST['email']."'
-            AND password = '".$_POST['password']."'";
-
-        $q = "SELECT token
-        FROM users
-        WHERE email = '".$_POST['email']."'
-        AND password = '".$_POST['password']."'";*/
 
         $q = 'SELECT token
             FROM users

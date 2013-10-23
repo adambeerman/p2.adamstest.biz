@@ -1,18 +1,27 @@
+html {
+    background-color: white;
+}
+
+body {
+    max-width: 600px;
+    background-color: whitesmoke;
+    border: 1px solid black;
+}
 
 .error {
     color: red;
 }
 
-.logo {
+#logo {
     font-size: 40px;
     color: darkblue;
     font-family: 'Lily Script One', cursive;
-    margin-left: 5px;
+    margin: 25px;
     text-align: center;
 }
 
 #menu {
-    background-color: lightgray;
+    background-color: lightcyan;
     border-bottom: 1px solid black;
     margin: 0 auto;
     font-family: 'Lily Script One', cursive;
@@ -26,12 +35,12 @@
     font-family: "Times New Roman",Georgia,Serif;;
 }
 
-.tagline {
+#tagline {
     font-family: 'Lily Script One', cursive;
     text-align: center;
 }
 
-#content {
+#main_content {
     background: white;
     margin: 20px;
     padding: 10px;
@@ -43,8 +52,3 @@ h3 {
     font-family: times, serif;
 }
 
-body {
-    max-width: 600px;
-    background-color: whitesmoke;
-    border: 1px solid black;
-}

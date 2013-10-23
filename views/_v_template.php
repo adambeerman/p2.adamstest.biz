@@ -7,6 +7,7 @@
 
     <!-- Common CSS/JSS -->
     <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lily+Script+One' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
@@ -24,7 +25,7 @@
     <div id='menu'>
 
 
-        <a href='/'><span class = "logo"><?php echo APP_NAME; ?></span></a>
+        <a href='/'><span id = "logo"><?php echo APP_NAME; ?></span></a>
         <br>
 
         <!-- Menu for users who are logged in -->
@@ -32,7 +33,8 @@
 
             <a href='/users/profile'>[ Profile ]</a>
             <a href='/posts/add'>[Jot Something]</a>
-            <a href='/posts/index'>[Your Posts]</a>
+            <a href='/posts/personal'> [ Your Posts ]</a>
+            <a href='/posts/index'>[ All Posts ]</a>
             <a href='/users/logout'>[ Logout ]</a>
 
             <!-- Menu options for users who are not logged in -->
@@ -45,9 +47,12 @@
 
     </div>
 
-    <span class = "tagline"><?php echo APP_TAGLINE."<br>"; ?></span>
+    <div id = "tagline">
+        <br>
+        <?php echo APP_TAGLINE."<br>"; ?>
+    </div>
 
-    <div id = "content">
+    <div id = "main_content">
         <?php if(isset($content)) echo $content; ?>
     </div>
 

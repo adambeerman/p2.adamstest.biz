@@ -21,9 +21,10 @@ class posts_controller extends base_controller {
         $this->template->title   = "Posts";
 
         # Build the query
-        $q = "SELECT posts .* , users.first_name, users.last_name
+        $q = "SELECT posts.* , users.first_name, users.last_name
             FROM posts
-            JOIN users";
+            JOIN users ON posts.user_id = users.user_id
+            ORDER BY modified DESC";
 
         # Run the query
         $posts = DB::instance(DB_NAME)->select_rows($q);
@@ -65,6 +66,31 @@ class posts_controller extends base_controller {
         echo "<a href='/posts/add'>Add another</a>";
         echo "<a href='/posts/index'> See All </a>";
 
+    }
+
+    public function personal() {
+
+        ## Display only posts that match the current user
+
+        # Same structure as the view of all posts
+        # Set up the View
+        $this->template->content = View::instance('v_posts_index');
+        $this->template->title   = "Posts";
+
+        # Build the query (NEED TO IMPROVE THIS QUERY!)
+        /*$q = "SELECT posts.* , users.first_name, users.last_name
+            FROM posts
+            JOIN users ON posts.user_id = '$this->user->user_id'
+            ORDER BY modified DESC"; */
+
+        # Run the query
+        $posts = DB::instance(DB_NAME)->select_rows($q);
+
+        # Pass data to the View
+        $this->template->content->posts = $posts;
+
+        # Render the View
+        echo $this->template;
     }
 
     public function edit() {
