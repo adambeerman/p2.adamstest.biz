@@ -23,7 +23,7 @@ class posts_controller extends base_controller {
         # Build the query
         $q = "SELECT posts.* , users.first_name, users.last_name
             FROM posts
-            JOIN users ON posts.user_id = users.user_id
+            INNER JOIN users ON posts.user_id = users.user_id
             ORDER BY modified DESC";
 
         # Run the query
@@ -78,10 +78,10 @@ class posts_controller extends base_controller {
         $this->template->title   = "Posts";
 
         # Build the query (NEED TO IMPROVE THIS QUERY!)
-        /*$q = "SELECT posts.* , users.first_name, users.last_name
+        $q = "SELECT posts.* , users.first_name, users.last_name
             FROM posts
-            JOIN users ON posts.user_id = '$this->user->user_id'
-            ORDER BY modified DESC"; */
+            INNER JOIN users ON posts.user_id = '$this->user->user_id'
+            ORDER BY modified DESC";
 
         # Run the query
         $posts = DB::instance(DB_NAME)->select_rows($q);
