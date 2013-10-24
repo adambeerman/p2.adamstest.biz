@@ -6,8 +6,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <!-- Common CSS/JSS -->
-    <link rel="stylesheet" href="/css/main.css" type="text/css">
     <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lily+Script+One' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
@@ -49,7 +49,9 @@
 
     <div id = "tagline">
         <br>
-        <?php echo APP_TAGLINE."<br>"; ?>
+        ~
+        <?php if(isset($title)) echo $title; else echo APP_TAGLINE?>
+        ~
     </div>
 
     <div id = "main_content">

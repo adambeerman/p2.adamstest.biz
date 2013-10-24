@@ -21,7 +21,10 @@ class posts_controller extends base_controller {
         $this->template->title   = "Posts";
 
         # Build the query
-        $q = "SELECT posts.* , users.first_name, users.last_name
+        $q = "SELECT
+              posts.* ,
+              users.first_name,
+              users.last_name
             FROM posts
             INNER JOIN users ON posts.user_id = users.user_id
             ORDER BY modified DESC";
@@ -75,13 +78,13 @@ class posts_controller extends base_controller {
         # Same structure as the view of all posts
         # Set up the View
         $this->template->content = View::instance('v_posts_index');
-        $this->template->title   = "Posts";
+        $this->template->title   = "Your Posts";
 
         # Build the query (NEED TO IMPROVE THIS QUERY!)
-        $q = "SELECT posts.* , users.first_name, users.last_name
-            FROM posts
-            INNER JOIN users ON posts.user_id = '$this->user->user_id'
-            ORDER BY modified DESC";
+        $q = "SELECT posts.*
+                FROM posts
+                WHERE user_id = ".$this->user->user_id.
+                " ORDER BY modified DESC";
 
         # Run the query
         $posts = DB::instance(DB_NAME)->select_rows($q);
@@ -99,6 +102,12 @@ class posts_controller extends base_controller {
     }
 
     public function delete_post(){
+
+    }
+
+    public function users(){
+
+
 
     }
 }

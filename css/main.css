@@ -1,11 +1,18 @@
-html {
+/*html {
     background-color: white;
-}
+}*/
 
 body {
     max-width: 600px;
-    background-color: whitesmoke;
-    border: 1px solid black;
+    /*background-color: whitesmoke;
+    /*border: 1px solid black;*/
+}
+
+article {
+    border-bottom-color: darkblue;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    background-color: lightgoldenrodyellow;
 }
 
 .error {
@@ -14,42 +21,53 @@ body {
 
 #logo {
     font-size: 40px;
-    color: darkblue;
-    font-family: 'Lily Script One', cursive;
+    color: darkred;
+    /*font-family: 'Lily Script One', cursive;*/
+    font-family: Impact, Charcoal, sans-serif;
     margin: 25px;
     text-align: center;
 }
 
 #menu {
-    background-color: lightcyan;
+    background-color: yellow;
     border-bottom: 1px solid black;
     margin: 0 auto;
     font-family: 'Lily Script One', cursive;
-    padding: 0;
+    padding: 15px;
     text-align: center;
-    top: 20px;
 }
 
 #menu a {
     margin: 5px;
     text-decoration: none;
-    font-family: "Times New Roman",Georgia,Serif;;
+    /*font-family: "Times New Roman",Georgia,Serif;*/
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: darkred;
+    font-family: Impact, Charcoal, sans-serif;
 }
 
 #tagline {
-    font-family: 'Lily Script One', cursive;
+    color: dimgray;
     text-align: center;
 }
 
 #main_content {
-    background: white;
+    background: #f5f5f5;
     margin: 20px;
     padding: 10px;
 }
 
-h3 {
+/*h3 {
     margin: 0 auto;
     margin-left: 5px;
     font-family: times, serif;
+}*/
+
+h3 {
+
+    font-family: Impact, Charcoal, sans-serif;
 }
 
+.faded {
+    color: dimgray;
+}
