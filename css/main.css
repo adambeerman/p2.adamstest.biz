@@ -22,7 +22,9 @@ article {
     margin: 25px;
     text-align: center;
 }
-
+a {
+    color: darkgray;
+}
 #menu {
     background-color: yellow;
     border-bottom: 1px solid black;
@@ -71,4 +73,8 @@ h3 {
 #users {
     border-bottom: 1px solid lightyellow;
     background-color: lightgoldenrodyellow;
+}
+
+blockquote {
+    border-left-color: darkred;
 }

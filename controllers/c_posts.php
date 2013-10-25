@@ -40,6 +40,34 @@ class posts_controller extends base_controller {
 
     }
 
+    public function following() {
+
+        # Set up the View
+        $this->template->content = View::instance('v_posts_index');
+        $this->template->title   = "Posts";
+
+        # Build the query to only choose those that you're following
+        $q = "SELECT
+              posts.* ,
+              users.first_name,
+              users.last_name
+            FROM posts
+            INNER JOIN users ON posts.user_id = users.user_id
+            INNER JOIN users_users ON posts.user_id = users_users.user_id_followed
+            WHERE posts.user_id = users_users.user_id_followed
+            ORDER BY modified DESC";
+
+        # Run the query
+        $posts = DB::instance(DB_NAME)->select_rows($q);
+
+        # Pass data to the View
+        $this->template->content->posts = $posts;
+
+        # Render the View
+        echo $this->template;
+
+    }
+
     public function add() {
 
         # Setup view
@@ -76,7 +104,7 @@ class posts_controller extends base_controller {
         # Same structure as the view of all posts
         # Set up the View
         $this->template->content = View::instance('v_posts_index');
-        $this->template->title   = "Your Posts";
+        $this->template->title   = $this->user->first_name." ".$this->user->last_name;
 
         # Build the query (NEED TO IMPROVE THIS QUERY!)
         $q = "SELECT posts.*
@@ -99,8 +127,16 @@ class posts_controller extends base_controller {
 
     }
 
-    public function delete_post(){
+    public function delete_post($post_id = NULL){
 
+        $where_condition = "WHERE posts.post_id = ".$post_id;
+
+        # Insert into the users_users table
+        DB::instance(DB_NAME)->delete('posts', $where_condition);
+
+
+        # Delete a post if it is yours
+        Router::redirect('/posts/personal');
     }
 
     public function users(){
@@ -140,11 +176,38 @@ class posts_controller extends base_controller {
 
     public function follow($user_id_followed) {
 
+        #with the user_id_followed information given, set the users_users
+        # table to indicate the $this->user is following user_id_followed
 
+        # Set up the information that will be inserted to users_users table
 
+        $data = Array(
+            "created" => Time::now(),
+            "user_id" => $this->user->user_id,
+            "user_id_followed" => $user_id_followed
+        );
+
+        # Insert into the users_users table
+        DB::instance(DB_NAME)->insert('users_users', $data);
+
+        # Redirect the user back to users page:
+        Router::redirect('/posts/users');
     }
 
     public function unfollow($user_id_followed) {
+
+        # When this function is called, delete the entry in users_users
+        # that pairs $this->user with $user_id_followed
+
+        # Set up the database query
+        $where_condition = "WHERE user_id = ". $this->user->user_id.
+            " AND user_id_followed = ". $user_id_followed;
+
+        # Delete from the users_users table
+        DB::instance(DB_NAME)->delete('users_users', $where_condition);
+
+        # Redirect the user back to users page:
+        Router::redirect('/posts/users');
 
     }
 }

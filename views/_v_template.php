@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php if(isset($title)) echo strtoupper($title); ?></title>
+	<title><?php if(isset($title)) echo $title; ?></title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
@@ -24,17 +24,20 @@
 
     <div id='menu'>
 
-
-        <a href='/'><span id = "logo"><?php echo APP_NAME; ?></span></a>
+        <!-- placeholder to be able to capitalize the app name on the home page -->
+        <?php $placeholder = APP_NAME ?>
+        <a href='/'><span id = "logo"><?php echo strtoupper($placeholder); ?></span></a>
         <br>
 
         <!-- Menu for users who are logged in -->
         <?php if($user): ?>
 
-            <a href='/users/profile'>[ Profile ]</a>
-            <a href='/posts/add'>[Jot Something]</a>
+            <a href='/users/profile'>[ Your Profile ]</a>
+            <a href='/posts/add'>[ New Post ]</a>
             <a href='/posts/personal'> [ Your Posts ]</a>
             <a href='/posts/index'>[ All Posts ]</a>
+            <a href='/posts/users'>[ All Users ]</a>
+            <a href='/posts/following'>[ Friends' Posts ]</a>
             <a href='/users/logout'>[ Logout ]</a>
 
             <!-- Menu options for users who are not logged in -->
