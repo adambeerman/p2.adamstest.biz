@@ -9,7 +9,7 @@ class users_controller extends base_controller {
     }
 
     public function index() {
-        echo "WELCOME <br>";
+
     }
 
     public function signup() {

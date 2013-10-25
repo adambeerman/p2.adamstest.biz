@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php if(isset($title)) echo $title; ?></title>
+	<title><?php if(isset($title)) echo strtoupper($title); ?></title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
@@ -46,19 +46,24 @@
         <?php endif; ?>
 
     </div>
+    <div style = "background-color: lightgoldenrodyellow">
 
-    <div id = "tagline">
-        <br>
-        ~
-        <?php if(isset($title)) echo $title; else echo APP_TAGLINE?>
-        ~
+
+
+        <div id = "main_content">
+            <?php if(isset($content)) echo $content; ?>
+        </div>
+
+        <?php if(isset($client_files_body)) echo $client_files_body; ?>
     </div>
-
-    <div id = "main_content">
-        <?php if(isset($content)) echo $content; ?>
+    <div style = "background-color: yellow; border-top: 1px black solid; height: 50px; color: black">
+        <div id = "tagline">
+            <br>
+            ~
+            <?php if(isset($title)) echo $title; else echo APP_TAGLINE?>
+            ~
+        </div>
     </div>
-
-    <?php if(isset($client_files_body)) echo $client_files_body; ?>
 
 </body>
 </html>

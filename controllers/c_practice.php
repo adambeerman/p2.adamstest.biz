@@ -16,12 +16,8 @@ class practice_controller extends base_controller {
         // echo "users_controller construct called<br><br>";
     }
 
-    public function practice() {
-        setcookie("test", 45);
-        echo "Cookie results";
-        echo '<pre>';
-        print_r($_COOKIE);
-        echo '</pre>';
+    public function practice($testword = NULL) {
+        echo strtoupper($testword);
 
     }
 }

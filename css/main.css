@@ -1,16 +1,11 @@
-/*html {
-    background-color: white;
-}*/
-
 body {
     max-width: 600px;
-    /*background-color: whitesmoke;
     /*border: 1px solid black;*/
 }
 
 article {
-    border-bottom-color: darkblue;
-    border-bottom-width: 1px;
+    border-bottom-color: lightyellow;
+    border-bottom-width: 2px;
     border-bottom-style: solid;
     background-color: lightgoldenrodyellow;
 }
@@ -47,12 +42,12 @@ article {
 }
 
 #tagline {
-    color: dimgray;
+    color: black;
     text-align: center;
 }
 
 #main_content {
-    background: #f5f5f5;
+    background: lightgoldenrodyellow;
     margin: 20px;
     padding: 10px;
 }
@@ -66,8 +61,14 @@ article {
 h3 {
 
     font-family: Impact, Charcoal, sans-serif;
+    color: darkred;
 }
 
 .faded {
     color: dimgray;
+}
+
+#users {
+    border-bottom: 1px solid lightyellow;
+    background-color: lightgoldenrodyellow;
 }

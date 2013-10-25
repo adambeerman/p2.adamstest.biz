@@ -7,11 +7,11 @@
 
         <p><?=$post['content']?></p>
 
-
-        <time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>" class = "faded">
-            <?=Time::display($post['created'])?>
-        </time>
-
+        <blockquote>
+            <time datetime="<?=Time::display($post['created'],'Y-m-d G:i')?>" class = "faded" style = "text-align: right">
+                <?=Time::display($post['created'])?>
+            </time>
+        </blockquote>
 
     </article>
 

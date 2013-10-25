@@ -64,10 +64,8 @@ class posts_controller extends base_controller {
         # Note we didn't have to sanitize any of the $_POST data because we're using the insert method which does it for us
         DB::instance(DB_NAME)->insert('posts', $_POST);
 
-        # Quick and dirty feedback
-        echo "Your post has been added. <br>";
-        echo "<a href='/posts/add'>Add another</a>";
-        echo "<a href='/posts/index'> See All </a>";
+        # Send user to their list of personal posts
+        Router::redirect('/posts/personal');
 
     }
 
@@ -107,7 +105,46 @@ class posts_controller extends base_controller {
 
     public function users(){
 
+        ## Display a list of users who we can follow and unfollow
 
+        # Same structure as the view of all posts
+        # Set up the View
+        $this->template->content = View::instance("v_posts_users");
+        $this->template->title   = "Users";
+
+        # Generate query of all users
+        $q = "SELECT *
+                FROM users";
+
+        $users = DB::instance(DB_NAME)->select_rows($q);
+
+        #Pass users to the views
+
+
+        # Generate query of all the relationships
+        # ... where the current user is the follower
+        $q = "SELECT *
+            FROM users_users
+            WHERE user_id = ".$this->user->user_id;
+
+        # Establish the "relationships" variable, indexed to user_id_followed
+        $connections = DB::instance(DB_NAME)->select_array($q,'user_id_followed');
+
+        # Pass users and relationships to the views
+        $this->template->content->users         = $users;
+        $this->template->content->connections   = $connections;
+
+        # Render the view
+        echo $this->template;
+    }
+
+    public function follow($user_id_followed) {
+
+
+
+    }
+
+    public function unfollow($user_id_followed) {
 
     }
 }
