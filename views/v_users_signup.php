@@ -1,5 +1,11 @@
 <h2>Sign Up</h2>
 
+<?php if(isset($email_error)): ?>
+    <div class='error'>
+        Sign up failed. Please verify that you supplied an appropriate e-mail address.
+    </div>
+<?php endif; ?>
+
 <form method='POST' action='/users/p_signup'>
 
     Name<br>

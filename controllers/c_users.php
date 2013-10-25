@@ -12,11 +12,14 @@ class users_controller extends base_controller {
 
     }
 
-    public function signup() {
+    public function signup($email_error = NULL) {
 
         # Setup view
         $this->template->content = View::instance('v_users_signup');
         $this->template->title   = "Sign Up";
+
+        # Pass data to the view
+        $this->template->content->email_error = $email_error;
 
         # Render template
         echo $this->template;
@@ -25,6 +28,12 @@ class users_controller extends base_controller {
 
     public function p_signup() {
 
+        # Validate that the user has entered a valid login name
+
+        $at_sign = strpos($_POST['email'], '@');
+        if($at_sign === false) {
+            Router::redirect('/users/signup/email_error');
+        }
 
         # Store time stamp data from user
         $_POST['created']  = Time::now();

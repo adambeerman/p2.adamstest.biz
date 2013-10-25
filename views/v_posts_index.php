@@ -12,7 +12,7 @@
                 <div class = "span11" >
                     <?=$post['content']?>
                 </div>
-                <div class = "span1" >
+                <div class = "span1 delete_post" >
                     <a href = '/posts/delete_post/<?=$post['post_id']?>' ><i class="icon-remove-circle icon-white"></i></a>
                 </div>
             </div>

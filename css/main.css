@@ -78,3 +78,7 @@ h3 {
 blockquote {
     border-left-color: darkred;
 }
+
+.delete_post a:hover {
+    background-color: black;
+}
