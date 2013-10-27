@@ -9,11 +9,14 @@
         <!-- Give the option to delete if this was your post -->
         <?php if($post['user_id']==$user->user_id):?>
             <div class = "row-fluid">
-                <div class = "span11" >
+                <div class = "span10" >
                     <?=$post['content']?>
                 </div>
+                <div class = "span1 edit_post" >
+                    <a href = '/posts/edit_post/<?=$post['post_id']?>' ><i class="icon-edit icon-white"></i></a>
+                </div>
                 <div class = "span1 delete_post" >
-                    <a href = '/posts/delete_post/<?=$post['post_id']?>' ><i class="icon-remove-circle icon-white"></i></a>
+                    <a href = '/posts/delete_post/<?=$post['post_id']?>' ><i class="icon-remove icon-white"></i></a>
                 </div>
             </div>
         <?php else: ?>

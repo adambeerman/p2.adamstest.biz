@@ -1,5 +1,6 @@
 <?php if(isset($user)): ?>
-    <h1><?=$user->first_name?>'s Profile</h1>
+    <img src = <?=$user->avatar?> >
+    <?=$user->first_name?>'s Profile
 <?php else: ?>
     <h1>No user specified</h1>
 <? endif; ?>

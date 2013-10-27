@@ -1,6 +1,12 @@
 body {
     max-width: 600px;
     /*border: 1px solid black;*/
+    margin: 0 auto;
+    margin-top: 20px;
+    border-style: groove;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 5px;
 }
 
 article {
@@ -32,6 +38,7 @@ a {
     font-family: 'Lily Script One', cursive;
     padding: 15px;
     text-align: center;
+    border-radius: 5px 5px 0 0;
 }
 
 #menu a {
@@ -43,6 +50,14 @@ a {
     font-family: Impact, Charcoal, sans-serif;
 }
 
+#footer {
+    background-color: yellow;
+    border-top: 1px black solid;
+    height: 50px;
+    color: black;
+    border-radius: 0 0 5px 5px;
+}
+
 #tagline {
     color: black;
     text-align: center;
@@ -50,7 +65,7 @@ a {
 
 #main_content {
     background: lightgoldenrodyellow;
-    margin: 20px;
+    margin: 20px 0 20px 0;
     padding: 10px;
 }
 
@@ -80,5 +95,9 @@ blockquote {
 }
 
 .delete_post a:hover {
+    background-color: black;
+}
+
+.edit_post a:hover {
     background-color: black;
 }

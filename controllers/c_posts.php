@@ -68,11 +68,14 @@ class posts_controller extends base_controller {
 
     }
 
-    public function add() {
+    public function add($error = NULL) {
 
         # Setup view
         $this->template->content = View::instance('v_posts_add');
         $this->template->title   = "New Post";
+
+        #Pass in any error information
+        $this->template->content->error = $error;
 
         # Render template
         echo $this->template;
@@ -81,13 +84,16 @@ class posts_controller extends base_controller {
 
     public function p_add() {
 
+        /*if (strlen($_POST['content']<1)) {
+            Router::redirect('/posts/add/error');
+        }*/
+
         # Associate this post with this user
         $_POST['user_id']  = $this->user->user_id;
 
         # Unix timestamp of when this post was created / modified
         $_POST['created']  = Time::now();
         $_POST['modified'] = Time::now();
-
 
         # Insert
         # Note we didn't have to sanitize any of the $_POST data because we're using the insert method which does it for us
@@ -123,8 +129,7 @@ class posts_controller extends base_controller {
         echo $this->template;
     }
 
-    public function edit() {
-
+    public function edit_post($post_id = NULL) {
 
     }
 

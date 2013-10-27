@@ -59,7 +59,7 @@
 
         <?php if(isset($client_files_body)) echo $client_files_body; ?>
     </div>
-    <div style = "background-color: yellow; border-top: 1px black solid; height: 50px; color: black">
+    <div id = "footer" >
         <div id = "tagline">
             <br>
             ~
