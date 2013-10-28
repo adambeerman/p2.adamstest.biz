@@ -47,7 +47,7 @@ a {
     /*font-family: "Times New Roman",Georgia,Serif;*/
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: darkred;
-    font-family: Impact, Charcoal, sans-serif;
+    /*font-family: Impact, Charcoal, sans-serif;*/
 }
 
 #footer {
@@ -91,13 +91,16 @@ h3 {
 }
 
 blockquote {
+    border-left-color: black;
+}
+blockquote.other_user {
     border-left-color: darkred;
 }
 
 .delete_post a:hover {
-    background-color: black;
+    background-color: yellow;
 }
 
 .edit_post a:hover {
-    background-color: black;
+    background-color: yellow;
 }

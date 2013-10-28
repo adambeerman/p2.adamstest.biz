@@ -155,20 +155,37 @@ class users_controller extends base_controller {
         # Create a new View instance
         # Do *not* include .php with the view name
 
+        # $avatar = new Image(APP_PATH."uploads/avatars/$this->user->avatar");
+
         # Setup view
         $this->template->content = View::instance('v_users_profile');
         $this->template->title   = $this->user->first_name." ".$this->user->last_name;
+        # $this->template->avatar = $this->user->avatar;
 
         # Render template
         echo $this->template;
 
     }
 
-    public function redirect_test() {
-        echo phpinfo();
+    public function display_image($avatar = NULL){
 
-        // $this->template->title   = "Redirect Test";
-        // Router::redirect("/index");
+        // Because of autoloading, we don't have to include image
+        //require(APP_PATH.'/libraries/Image.php');
+
+        /*
+        Instantiate an Image object using the "new" keyword
+        Whatever params we use when instantiating are passed to __construct
+        */
+        $imageObj = new Image('/uploads/avatars/<?=$avatar?>');
+
+        /*
+        Call the resize method on this object using the object operator (single arrow ->)
+        which is used to access methods and properties of an object
+        */
+        $imageObj->resize(100,210);
+
+        # Display the resized image
+        $imageObj->display();
 
     }
 

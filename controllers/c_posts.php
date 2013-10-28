@@ -84,9 +84,9 @@ class posts_controller extends base_controller {
 
     public function p_add() {
 
-        /*if (strlen($_POST['content']<1)) {
+        if (strlen($_POST['content'])<1) {
             Router::redirect('/posts/add/error');
-        }*/
+        }
 
         # Associate this post with this user
         $_POST['user_id']  = $this->user->user_id;
@@ -131,6 +131,44 @@ class posts_controller extends base_controller {
 
     public function edit_post($post_id = NULL) {
 
+        # Setup view
+        $this->template->content = View::instance('v_posts_add');
+        $this->template->title   = "Edit Post";
+
+        #Find the original post
+        $q = "SELECT posts.content
+                FROM posts
+                WHERE post_id = ".$post_id;
+
+        $post = DB::instance(DB_NAME)->select_field($q);
+
+        #Pass the post content to the view
+        $this->template->content->post = $post;
+
+        #Pass in post_id information
+        $this->template->content->post_id = $post_id;
+
+        # Render template
+        echo $this->template;
+
+    }
+
+    public function p_edit($post_id = NULL) {
+
+        # Associate this post with this user
+        $_POST['user_id']  = $this->user->user_id;
+
+        # Unix timestamp to update when the field was modified
+        $_POST['modified'] = Time::now();
+
+        $where_condition = "WHERE posts.post_id = ".$post_id;
+
+        # Edit the entry in the database
+        DB::instance(DB_NAME)->update_row('posts', $_POST, $where_condition);
+
+        # Send user to their list of personal posts
+        Router::redirect('/posts/personal');
+
     }
 
     public function delete_post($post_id = NULL){
@@ -159,9 +197,6 @@ class posts_controller extends base_controller {
                 FROM users";
 
         $users = DB::instance(DB_NAME)->select_rows($q);
-
-        #Pass users to the views
-
 
         # Generate query of all the relationships
         # ... where the current user is the follower
