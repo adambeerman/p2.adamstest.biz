@@ -134,7 +134,7 @@ blockquote.other_user {
 }
 
 .delete_post a:hover {
-    background-color: yellow;
+    background-color: red;
 }
 
 .edit_post a:hover {
@@ -142,9 +142,5 @@ blockquote.other_user {
 }
 
 ul li:hover {
-    color: #ffffff;
-}
-
-ul li a:hover {
-    color: #ffffff;
+    background-color: red;
 }
