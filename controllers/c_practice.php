@@ -16,8 +16,9 @@ class practice_controller extends base_controller {
         // echo "users_controller construct called<br><br>";
     }
 
-    public function practice($testword = NULL) {
-        echo strtoupper($testword);
+    public function practice() {
+
 
     }
+
 }

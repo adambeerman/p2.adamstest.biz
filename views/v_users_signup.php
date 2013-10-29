@@ -11,6 +11,10 @@
             break;
         case 2: echo "E-mail address already exists!";
             break;
+        case 3: echo "We at least need your first name!";
+            break;
+        case 4: echo "Password needs to be at least 6 characters";
+            break;
         default: echo "Login issues. We're working on it!";
             break;
     }?>

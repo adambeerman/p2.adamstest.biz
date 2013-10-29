@@ -34,15 +34,23 @@ class users_controller extends base_controller {
             Router::redirect('/users/signup/1');
         }
 
+        # if the email has already been created, then alert the person signing up
         $email = $_POST['email'];
-        $q = "SELECT email FROM users WHERE email = '".$email."'";
-        $emailexists = DB::instance(DB_NAME)->query($q);
+        $q = "SELECT created FROM users WHERE email = '".$email."'";
+        $emailexists = DB::instance(DB_NAME)->select_field($q);
 
-        if($emailexists){
+        if(isset($emailexists)){
             Router::redirect('/users/signup/2');
         }
 
-        
+        if(strlen($_POST['first_name'])<1){
+            Router::redirect('/users/signup/3');
+        }
+
+        if(strlen($_POST['password'])<6) {
+            Router::redirect('/users/signup/4');
+        }
+
 
         # Store time stamp data from user
         $_POST['created']  = Time::now();
