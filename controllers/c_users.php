@@ -12,14 +12,14 @@ class users_controller extends base_controller {
 
     }
 
-    public function signup($email_error = NULL) {
+    public function signup($error = NULL) {
 
         # Setup view
         $this->template->content = View::instance('v_users_signup');
         $this->template->title   = "Sign Up";
 
         # Pass data to the view
-        $this->template->content->email_error = $email_error;
+        $this->template->content->error = $error;
 
         # Render template
         echo $this->template;
@@ -29,11 +29,20 @@ class users_controller extends base_controller {
     public function p_signup() {
 
         # Validate that the user has entered a valid login name
-
         $at_sign = strpos($_POST['email'], '@');
         if($at_sign === false) {
-            Router::redirect('/users/signup/email_error');
+            Router::redirect('/users/signup/1');
         }
+
+        $email = $_POST['email'];
+        $q = "SELECT email FROM users WHERE email = '".$email."'";
+        $emailexists = DB::instance(DB_NAME)->query($q);
+
+        if($emailexists){
+            Router::redirect('/users/signup/2');
+        }
+
+        
 
         # Store time stamp data from user
         $_POST['created']  = Time::now();
@@ -103,7 +112,7 @@ class users_controller extends base_controller {
         if(!$token) {
 
             # Send them back to the login page
-            Router::redirect("/users/login/error");
+            Router::redirect("/users/login/1");
 
             # But if we did, login succeeded!
         } else {
