@@ -1,24 +1,4 @@
-body {
-    max-width: 600px;
-    /*border: 1px solid black;*/
-    margin: 0 auto;
-    margin-top: 20px;
-    border-style: groove;
-    border-width: 2px;
-    border-color: black;
-    border-radius: 5px;
-}
-
-article {
-    border-bottom-color: lightyellow;
-    border-bottom-width: 2px;
-    border-bottom-style: solid;
-    background-color: lightgoldenrodyellow;
-}
-
-.error {
-    color: red;
-}
+/* HEADING  */
 
 #logo {
     font-size: 40px;
@@ -27,10 +7,9 @@ article {
     font-family: Impact, Charcoal, sans-serif;
     margin: 25px;
     text-align: center;
+    text-decoration:underline;
 }
-a {
-    color: darkgray;
-}
+
 #menu {
     background-color: yellow;
     border-bottom: 1px solid black;
@@ -39,6 +18,7 @@ a {
     padding: 15px;
     text-align: center;
     border-radius: 5px 5px 0 0;
+    overflow: hidden;
 }
 
 #menu a {
@@ -48,14 +28,59 @@ a {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: darkred;
     /*font-family: Impact, Charcoal, sans-serif;*/
+
 }
 
-#footer {
-    background-color: yellow;
-    border-top: 1px black solid;
-    height: 50px;
-    color: black;
-    border-radius: 0 0 5px 5px;
+ul {
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    left: 50%;
+    position: relative;
+    float: left;
+    display: block;
+
+}
+
+ul li {
+    list-style: none;
+    float: left;
+    display: block;
+    position:relative;
+    border-right: darkred solid 1px;
+    right: 50%;
+}
+
+ul li:last-child {
+    border-right: none;
+}
+
+
+
+/* CONTENTS */
+
+body {
+    max-width: 600px;
+    /*border: 1px solid black;*/
+    margin: 0 auto;
+    margin-top: 20px;
+    border-style: groove;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 3px black;
+
+}
+
+article {
+    border-bottom-color: lightyellow;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    background-color: lightgoldenrodyellow;
+}
+
+a {
+    color: darkgray;
 }
 
 #tagline {
@@ -69,18 +94,28 @@ a {
     padding: 10px;
 }
 
-/*h3 {
-    margin: 0 auto;
-    margin-left: 5px;
-    font-family: times, serif;
-}*/
-
 h3 {
 
     font-family: Impact, Charcoal, sans-serif;
     color: darkred;
 }
 
+/* FOOTER */
+
+#footer {
+    background-color: yellow;
+    border-top: 1px black solid;
+    height: 50px;
+    color: black;
+    border-radius: 0 0 5px 5px;
+}
+
+
+/* SPECIAL ALERTS AND EFFECTS */
+
+.error {
+    color: red;
+}
 .faded {
     color: dimgray;
 }
@@ -93,6 +128,7 @@ h3 {
 blockquote {
     border-left-color: black;
 }
+
 blockquote.other_user {
     border-left-color: darkred;
 }
@@ -103,4 +139,12 @@ blockquote.other_user {
 
 .edit_post a:hover {
     background-color: yellow;
+}
+
+ul li:hover {
+    color: #ffffff;
+}
+
+ul li a:hover {
+    color: #ffffff;
 }

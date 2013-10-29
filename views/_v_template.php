@@ -30,15 +30,32 @@
         <br>
 
         <!-- Menu for users who are logged in -->
+        <br>
         <?php if($user): ?>
+            <ul>
+                <li>
+                    <a href='/users/profile'>Profile</a>
+                </li>
+                <li>
+                    <a href='/posts/add'>New Post</a>
+                </li>
+                <li>
+                    <a href='/posts/personal'>Your Posts</a>
+                </li>
+                <li>
+                    <a href='/posts/index'>All Posts</a>
+                </li>
+                <li>
+                    <a href='/posts/following'>Friends' Posts</a>
+                </li>
+                <li>
+                    <a href='/posts/users'>All Users</a>
+                </li>
+                <li>
+                    <a href='/users/logout'>Logout</a>
+                </li>
+            </ul>
 
-            <a href='/users/profile'>[ Your Profile ]</a>
-            <a href='/posts/add'>[ New Post ]</a>
-            <a href='/posts/personal'> [ Your Posts ]</a>
-            <a href='/posts/index'>[ All Posts ]</a>
-            <a href='/posts/users'>[ All Users ]</a>
-            <a href='/posts/following'>[ Friends' Posts ]</a>
-            <a href='/users/logout'>[ Logout ]</a>
 
             <!-- Menu options for users who are not logged in -->
         <?php else: ?>
@@ -46,8 +63,10 @@
             <a href='/users/signup'>[ Sign up ]</a>
             <a href='/users/login'>[ Log in ]</a>
 
-        <?php endif; ?>
 
+        <?php endif; ?>
+        <br>
+        <br>
     </div>
     <div style = "background-color: lightgoldenrodyellow">
 
@@ -66,6 +85,7 @@
             <?php if(isset($title)) echo $title; else echo APP_TAGLINE?>
             ~
         </div>
+
     </div>
 
 </body>
