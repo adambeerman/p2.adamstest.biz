@@ -18,7 +18,35 @@ class practice_controller extends base_controller {
 
     public function practice() {
 
+        echo APP_PATH.AVATAR_PATH;
+        echo "<br>";
+        echo AVATAR_PATH.$this->user->avatar;
+        echo "<br>";
+        echo $this->user->avatar;
+        /*
+        $imgObj = new Image(APP_PATH.AVATAR_PATH.jpg');
+        $imgObj->resize(200, 200);
+        echo "<img src = '".$imgObj."'>";*/
+    }
 
+    public function practice2() {
+        #$avatar = new Image(APP_PATH."uploads/avatars/$this->user->avatar");
+
+        echo APP_PATH.$this->user->avatar;
+        $this->image = open_image(APP_PATH.$this->user->avatar);
+        echo $this->image;
+
+        echo "<br>";
+        echo APP_PATH.$this->user->avatar;
+        echo "<br>";
+        echo realpath(dirname(__FILE__));
+
+        $imgObj = new Image('Users/adam/Sites/p2.adamstest.biz/uploads/avatars/beatrix.jpg');
+        $imgObj = resize(200,200);
+        #echo $avatar;
+
+        echo "<br> TEST COMPLETE";
+        #$avatar->resize(200,200);
     }
 
 }

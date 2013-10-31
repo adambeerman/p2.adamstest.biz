@@ -172,8 +172,6 @@ class users_controller extends base_controller {
         # Create a new View instance
         # Do *not* include .php with the view name
 
-        # $avatar = new Image(APP_PATH."uploads/avatars/$this->user->avatar");
-
         # Setup view
         $this->template->content = View::instance('v_users_profile');
         $this->template->title   = $this->user->first_name." ".$this->user->last_name;
@@ -181,6 +179,28 @@ class users_controller extends base_controller {
 
         # Render template
         echo $this->template;
+
+    }
+
+    public function p_upload($user_name = NULL) {
+
+        echo "<pre>";
+        print_r($_FILES);
+        echo "<pre>";
+
+        # Upload the image to the file structure
+        Upload::upload($_FILES, "/uploads/avatars/", array("jpg", "jpeg", "gif", "png"), $this->user->user_id);
+
+        //IS THIS WHERE I WOULD RESIZE THE IMAGE? HOW!!!
+        AVATAR_PATH.$this->user->user_id.jpg->resize(200,200);
+        #$this->image->resize(200,200);
+
+        # array to update the user's avatar destination
+        $data = Array("avatar" => $this->user->user_id.".jpg");
+
+        # Update the users table with the user_id
+        DB::instance(DB_NAME)->update_row("users", $data, "WHERE user_id = '".$this->user->user_id."'");
+        Router::redirect('/users/profile');
 
     }
 

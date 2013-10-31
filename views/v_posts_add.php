@@ -21,9 +21,7 @@ User needs to be redirected to posts/p_edit/post_id instead -->
         <div class = "span12" align = "center">
 
             <!-- if the $post_id is set, then pre-populate text area with prior post -->
-            <textarea name='content' id='content' rows="3">
-                <?php if(isset($post_id)): ?><?=$post?><?php endif; ?>
-            </textarea>
+            <textarea name='content' id='content' rows="3"><?php if(isset($post_id)): ?><?=$post?><?php endif; ?></textarea>
 
         </div>
         <div class = "span12" align = "center">

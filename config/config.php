@@ -38,6 +38,12 @@ A email designated to receive messages from the server. Examples:
 # Timezone
 	define('TIMEZONE', 'America/New_York');
 
+#  Image / Avatar settings
+    define('AVATAR_PATH', "/uploads/avatars/");
+    define('SMALL_W', 200);
+    define('SMALL_H', 200);
+    define('PLACE_HOLDER_IMAGE', "/uploads/avatars/example.gif");
+
 # If your app is going to have outgoing emails, you should fill in your SMTP settings
 # For this you could use gmail SMTP or something like http://sendgrid.com/
 	//define('SMTP_HOST', '');
