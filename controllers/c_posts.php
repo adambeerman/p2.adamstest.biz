@@ -47,7 +47,7 @@ class posts_controller extends base_controller {
         $this->template->content = View::instance('v_posts_index');
         $this->template->title   = "Posts";
 
-        # Build the query to only choose those that you're following
+        # Build the query to only choose those posts from users that you're following
         $q = "SELECT
               posts.* ,
               users.first_name,
@@ -56,8 +56,8 @@ class posts_controller extends base_controller {
             FROM posts
             INNER JOIN users ON posts.user_id = users.user_id
             INNER JOIN users_users ON posts.user_id = users_users.user_id_followed
-            WHERE posts.user_id = users_users.user_id_followed
-            ORDER BY modified DESC";
+            WHERE users_users.user_id = ".$this->user->user_id."
+             ORDER BY modified DESC";
 
         # Run the query
         $posts = DB::instance(DB_NAME)->select_rows($q);
