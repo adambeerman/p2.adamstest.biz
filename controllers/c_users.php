@@ -184,8 +184,12 @@ class users_controller extends base_controller {
 
         # Setup view
         $this->template->content = View::instance('v_users_profile');
+
+        # Include view for post index
+        # $this->template->content->moreContent = View::instance('v_posts_index');
+
+        #Include user information (not needed since $user will already be available in views?)
         $this->template->title   = $this->user->first_name." ".$this->user->last_name;
-        //$this->template->profile_photo = $imgObj;
         $this->template->error = $error;
 
         # Render template

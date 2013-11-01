@@ -23,10 +23,10 @@
 <body>
 
     <div id='menu'>
-
+        <br>
         <!-- placeholder to be able to capitalize the app name on the home page -->
         <?php $placeholder = APP_NAME ?>
-        <a href='/'><span id = "logo"><?php echo strtoupper($placeholder); ?></span></a>
+        <a href='/'><strong><span id = "logo"><?php echo strtoupper($placeholder); ?></span></strong></a>
         <br>
 
         <!-- Menu for users who are logged in -->
@@ -65,7 +65,6 @@
 
 
         <?php endif; ?>
-        <br>
         <br>
     </div>
     <div style = "background-color: lightgoldenrodyellow">

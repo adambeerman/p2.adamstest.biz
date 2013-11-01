@@ -1,13 +1,14 @@
 /* HEADING  */
 
 #logo {
-    font-size: 40px;
+    font-size: 60px;
     color: darkred;
     /*font-family: 'Lily Script One', cursive;*/
     font-family: Impact, Charcoal, sans-serif;
     margin: 25px;
+    margin-top: 100px;
     text-align: center;
-    text-decoration:underline;
+    /*text-decoration:underline;*/
 }
 
 #menu {
@@ -59,9 +60,11 @@ ul li:last-child {
 /* CONTENTS */
 
 body {
-    max-width: 600px;
+    /*max-width: 600px;*/
     /*border: 1px solid black;*/
     margin: 0 auto;
+    margin-right: 50px;
+    margin-left: 50px;
     margin-top: 20px;
     border-style: groove;
     border-width: 2px;
@@ -88,8 +91,12 @@ a {
 }
 
 #main_content {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     background: lightgoldenrodyellow;
-    margin: 20px 0 20px 0;
+    /*margin: 20px 0 20px 0;*/
     padding: 10px;
 }
 
