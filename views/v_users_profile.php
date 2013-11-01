@@ -15,10 +15,9 @@
         <div class = "span4">
             <?php
             //Display user photo!
-            echo "<img src = '".AVATAR_PATH.$user->photo."' alt = 'User Photo'>";
-            //echo "<br>";
-            //echo "avatar";
-            //echo "<img src = '".$user->avatar."' alt = 'User Photo'";
+            echo "<br><br>";
+            echo "<img src = '".AVATAR_PATH.$user->photo."' alt = 'User Photo'";
+
             ?>
 
             <!-- Allow user to upload a new photo if they do not want the default -->
@@ -26,14 +25,18 @@
 
             <form method='POST' enctype="multipart/form-data" action='/users/p_upload/'>
 
-                <input type='file' name='avatar'>
-                <br>
-                <input type='submit'>
+                <div class = "upload_file_container faded">
+                    Change Profile Photo?
+                    <input type='file' name='avatar'>
+                    <input type='submit'>
+                </div>
+
+
 
             </form>
 
         </div>
-        <div class = "span8">
+        <div class = "span7">
             <?php if(isset($user)): ?>
                 <h3><?=$user->first_name?> <?=$user->last_name?></h3>
             <?php endif; ?>
@@ -46,10 +49,13 @@
                         <article>
                             <!-- Give the option to delete if this was your post -->
                             <div class = "row-fluid">
-                                <div class = "span10" >
+                                <div class = "span8" >
                                     <blockquote>
                                         <?=$post['content']?>
                                     </blockquote>
+                                </div>
+                                <div class = "span2">
+
                                 </div>
                                 <div class = "span1 edit_post" >
                                     <a href = '/posts/edit_post/<?=$post['post_id']?>' ><i class="icon-edit"></i></a>

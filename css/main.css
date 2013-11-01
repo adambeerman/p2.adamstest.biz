@@ -124,6 +124,9 @@ h3 {
 .error {
     color: red;
 }
+.welcome {
+    color: green;
+}
 .faded {
     color: dimgray;
 }

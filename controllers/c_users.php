@@ -77,7 +77,7 @@ class users_controller extends base_controller {
         //echo 'You\'re signed up';
 
         // Redirect to login page?
-        Router::redirect('/users/login');
+        Router::redirect('/users/login/2');
 
         // Dump the $_POST data to see what was submitted
         // print_r($_POST);
@@ -225,29 +225,6 @@ class users_controller extends base_controller {
 
         // Redirect back to the profile page
         router::redirect('/users/profile');
-    }
-
-
-    public function display_image($avatar = NULL){
-
-        // Because of autoloading, we don't have to include image
-        //require(APP_PATH.'/libraries/Image.php');
-
-        /*
-        Instantiate an Image object using the "new" keyword
-        Whatever params we use when instantiating are passed to __construct
-        */
-        $imageObj = new Image('/uploads/avatars/<?=$avatar?>');
-
-        /*
-        Call the resize method on this object using the object operator (single arrow ->)
-        which is used to access methods and properties of an object
-        */
-        $imageObj->resize(100,210);
-
-        # Display the resized image
-        $imageObj->display();
-
     }
 
 } # end of the class

@@ -1,10 +1,24 @@
 
 <?php if(isset($error)): ?>
-    <div class='error'>
+    <?php
+        switch($error) {
+            case 1:
+                echo "<div class='error'>";
+                echo "Login failed. Please double check your email and password";
+                echo "</div>";
+                break;
+            case 2:
+                echo "<div class ='welcome'>";
+                echo "Thank you for joining ".APP_NAME."!";
+                echo "<br>";
+                echo "Please login below";
+                echo "</div>";
+                break;
+            default:
+                break;
+        }
+    ?>
 
-
-        Login failed. Please double check your email and password.
-    </div>
 <?php endif; ?>
 
 <h2>Log In</h2>

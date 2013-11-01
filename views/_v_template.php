@@ -40,9 +40,6 @@
                     <a href='/posts/add'>New Post</a>
                 </li>
                 <li>
-                    <a href='/posts/personal'>Your Posts</a>
-                </li>
-                <li>
                     <a href='/posts/index'>All Posts</a>
                 </li>
                 <li>

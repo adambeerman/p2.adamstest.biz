@@ -5,17 +5,16 @@
 
     <article>
 
-        <?php if($post['first_name']): ?>
-            <h4><?=$post['first_name']?> <?=$post['last_name']?>:</h4>
-        <?php endif; ?>
-
         <!-- Give the option to delete if this was your post -->
         <?php if($post['user_id']==$user->user_id):?>
             <div class = "row-fluid">
                 <div class = "span2">
-                    <img src = '<?=$user->avatar ?>' alt = "user" >
+                    <img src = '<?=$user->avatar ?>' alt = "user" class = "img-polaroid">
                 </div>
                 <div class = "span8" >
+                    <?php if($post['first_name']): ?>
+                        <h4><?=$post['first_name']?> <?=$post['last_name']?>:</h4>
+                    <?php endif; ?>
                     <blockquote>
                         <?=$post['content']?>
                     </blockquote>
@@ -30,9 +29,12 @@
         <?php else: ?>
             <div class = "row-fluid">
                 <div class = "span2">
-                    <img src = '/uploads/avatars/<?=$post['avatar']?>' alt = "user" >
+                    <img src = '/uploads/avatars/<?=$post['avatar']?>' alt = "user" class="img-polaroid">
                 </div>
                 <div class="span8">
+                    <?php if($post['first_name']): ?>
+                        <h4><?=$post['first_name']?> <?=$post['last_name']?>:</h4>
+                    <?php endif; ?>
                     <blockquote class = "other_user">
                         <?=$post['content']?>
                     </blockquote>

@@ -102,7 +102,7 @@ class posts_controller extends base_controller {
         DB::instance(DB_NAME)->insert('posts', $_POST);
 
         # Send user to their list of personal posts
-        Router::redirect('/posts/personal');
+        Router::redirect('/users/profile');
 
     }
 
@@ -173,7 +173,7 @@ class posts_controller extends base_controller {
         DB::instance(DB_NAME)->update_row('posts', $_POST, $where_condition);
 
         # Send user to their list of personal posts
-        Router::redirect('/posts/personal');
+        Router::redirect('/users/profile');
 
     }
 
@@ -186,7 +186,7 @@ class posts_controller extends base_controller {
 
 
         # Delete a post if it is yours
-        Router::redirect('/posts/personal');
+        Router::redirect('/users/profile');
     }
 
     public function users(){
