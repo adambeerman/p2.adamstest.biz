@@ -1,3 +1,6 @@
+<?php if(isset($profile_flag)): ?>
+<?php endif; ?>
+
 <?php foreach($posts as $post): ?>
 
     <article>

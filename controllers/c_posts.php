@@ -115,7 +115,7 @@ class posts_controller extends base_controller {
         $this->template->content = View::instance('v_posts_index');
         $this->template->title   = $this->user->first_name." ".$this->user->last_name;
 
-        # Build the query (NEED TO IMPROVE THIS QUERY!)
+        # Build the query
         $q = "SELECT posts.*
                 FROM posts
                 WHERE user_id = ".$this->user->user_id.
@@ -126,6 +126,10 @@ class posts_controller extends base_controller {
 
         # Pass data to the View
         $this->template->content->posts = $posts;
+
+        # Pass the profile flag
+        $profile_flag = 1;
+        $this->template->content->profile_flag = $profile_flag;
 
         # Render the View
         echo $this->template;

@@ -113,14 +113,7 @@ class users_controller extends base_controller {
             WHERE email = "'.$_POST['email'].'"
             AND password = "'.$_POST['password'].'"';
 
-        /*echo "q is <br>";
-        echo $q;
-        echo "<br>";*/
-
         $token = DB::instance(DB_NAME)->select_field($q);
-        /*echo "Display the token <br>";
-        echo $token;
-        echo "<br><br>";*/
 
         # If we didn't find a matching token in the database, it means login failed
         if(!$token) {
@@ -136,19 +129,8 @@ class users_controller extends base_controller {
             */
             setcookie("token", $token, strtotime('+1 year'), '/', false);
 
-            /*echo "LOGIN SUCCESSFUL <br />";
-            echo "Display the token <br />";
-            echo $_COOKIE["token"];*/
-
-            //Debug
-            /*echo "Cookie results";
-            echo '<pre>';
-            print_r($_COOKIE);
-            echo '</pre>';*/
-
-            # Send them to the main page - or wherever you want them to go
+            # Send them to the main page
             Router::redirect('/');
-
         }
 
     }
@@ -167,8 +149,6 @@ class users_controller extends base_controller {
         # Delete their token cookie by setting it to a date in the past - effectively logging them out
         setcookie("token", "", strtotime('-1 year'), '/');
 
-        setcookie("just_logged_out", TRUE);
-
         # Send them back to the main index.
         Router::redirect("/");
     }
@@ -176,21 +156,29 @@ class users_controller extends base_controller {
     public function profile($error = NULL) {
 
         # Create a new View instance
-        # Do *not* include .php with the view name
-
-        /*echo AVATAR_PATH.$this->user->user_id.".jpg";
-        $imgObj = new Image(AVATAR_PATH.$this->user->user_id."jpg");
-        echo $imgObj ->exists(TRUE);*/
 
         # Setup view
         $this->template->content = View::instance('v_users_profile');
 
-        # Include view for post index
-        # $this->template->content->moreContent = View::instance('v_posts_index');
-
-        #Include user information (not needed since $user will already be available in views?)
+        #Include user information
         $this->template->title   = $this->user->first_name." ".$this->user->last_name;
         $this->template->error = $error;
+
+        //Following block is specific to importing the user's own posts to profile page
+
+
+            # Build the query (same query as posts/personal/)
+            $q = "SELECT posts.*
+                    FROM posts
+                    WHERE user_id = ".$this->user->user_id.
+                " ORDER BY modified DESC";
+
+            # Run the query
+            $posts = DB::instance(DB_NAME)->select_rows($q);
+
+            # Pass data to the View
+            $this->template->content->posts = $posts;
+        // END IMPORT BLOCK
 
         # Render template
         echo $this->template;

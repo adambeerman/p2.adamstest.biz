@@ -1,6 +1,6 @@
 <?php if(!isset($user)): ?>
     <h1>No user specified</h1>
-<? endif; ?>
+<?php endif; ?>
 
 <br>
 
@@ -8,7 +8,7 @@
     <div class = "error">
         Error uploading image.
     </div>
-<? endif; ?>
+<?php endif; ?>
 
 <div>
     <div class = "row-fluid">
@@ -35,11 +35,38 @@
         </div>
         <div class = "span8">
             <?php if(isset($user)): ?>
-                Welcome, <?=$user->first_name?>!
+                <h3><?=$user->first_name?> <?=$user->last_name?></h3>
             <?php endif; ?>
             <!-- display the user's own posts on their profile page -->
             <div>
-                <?=$personalPosts;?>
+                <br>
+                <?php if(isset($posts)): ?>
+                    <?php foreach($posts as $post): ?>
+
+                        <article>
+                            <!-- Give the option to delete if this was your post -->
+                            <div class = "row-fluid">
+                                <div class = "span10" >
+                                    <blockquote>
+                                        <?=$post['content']?>
+                                    </blockquote>
+                                </div>
+                                <div class = "span1 edit_post" >
+                                    <a href = '/posts/edit_post/<?=$post['post_id']?>' ><i class="icon-edit"></i></a>
+                                </div>
+                                <div class = "span1 delete_post" >
+                                    <a href = '/posts/delete_post/<?=$post['post_id']?>' ><i class="icon-remove"></i></a>
+                                </div>
+                            </div>
+
+                            <div class = "faded" style = "text-align: right">
+                                <time datetime="<?=Time::display($post['modified'],'m/d/y g:i A')?>" >
+                                    <?=Time::display($post['modified'], 'm/d/y g:i A')?>
+                                </time>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>

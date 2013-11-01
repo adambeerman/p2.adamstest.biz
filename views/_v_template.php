@@ -59,11 +59,14 @@
 
             <!-- Menu options for users who are not logged in -->
         <?php else: ?>
-
-            <a href='/users/signup'>[ Sign up ]</a>
-            <a href='/users/login'>[ Log in ]</a>
-
-
+            <ul>
+                <li>
+                    <a href='/users/signup'>Sign up</a>
+                </li>
+                <li>
+                    <a href='/users/login'>Log in</a>
+                </li>
+            </ul>
         <?php endif; ?>
         <br>
     </div>
