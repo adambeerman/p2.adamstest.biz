@@ -5,34 +5,28 @@
 <? endif; ?>
 
 <br>
-<div style = "width: 200px; height: 200px">
 
+<?php if(isset($error)): ?>
+    <div class = "error">
+        Error uploading image.
+    </div>
+<? endif; ?>
+
+<div>
 
     <?php
-        // Want to display the 'example.gif' profile photo if nothing is uploaded
-        #$profilePhoto = open_image(APP_PATH.$user->avatar);
-
-        /*$im = open_image($user->avatar);
-
-        // Set the content type header - in this case image/jpeg
-        header('Content-Type: image/gif');
-
-        // Output the image
-        imagegif($im);
-
-        // Free up memory
-        imagedestroy($im);*/
-
-        echo "<img src = '".$user->avatar."'>";
-
+        echo "photo";
+        echo "<img src = '".AVATAR_PATH.$user->photo."' alt = 'User Photo'>";
+        echo "<br>";
+        echo "avatar";
+        echo "<img src = '".$user->avatar."' alt = 'User Photo'";
     ?>
 </div>
 
     <!-- Allow user to upload a new photo if they do not want the default -->
-
     <form method='POST' enctype="multipart/form-data" action='/users/p_upload/'>
 
-        <input type='file' name='avatar' placeholder="Change?">
+        <input type='file' name='avatar'>
         <br>
         <input type='submit'>
 

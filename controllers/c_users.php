@@ -43,13 +43,19 @@ class users_controller extends base_controller {
             Router::redirect('/users/signup/2');
         }
 
+        // Ensure that the user has entered a first name
         if(strlen($_POST['first_name'])<1){
             Router::redirect('/users/signup/3');
         }
 
+        // Ensure password is greater than 5 characters
         if(strlen($_POST['password'])<6) {
             Router::redirect('/users/signup/4');
         }
+
+        # Give user the default avatar and profile photo
+        $_POST['avatar'] = "example.gif";
+        $_POST['photo'] = "p_example.gif";
 
 
         # Store time stamp data from user
@@ -167,42 +173,68 @@ class users_controller extends base_controller {
         Router::redirect("/");
     }
 
-    public function profile($user_name = NULL) {
+    public function profile($error = NULL) {
 
         # Create a new View instance
         # Do *not* include .php with the view name
 
+        /*echo AVATAR_PATH.$this->user->user_id.".jpg";
+        $imgObj = new Image(AVATAR_PATH.$this->user->user_id."jpg");
+        echo $imgObj ->exists(TRUE);*/
+
         # Setup view
         $this->template->content = View::instance('v_users_profile');
         $this->template->title   = $this->user->first_name." ".$this->user->last_name;
-        # $this->template->avatar = $this->user->avatar;
+        //$this->template->profile_photo = $imgObj;
+        $this->template->error = $error;
 
         # Render template
         echo $this->template;
 
     }
 
-    public function p_upload($user_name = NULL) {
+    public function p_upload() {
+        // if user specified a new image file, upload it
+        if ($_FILES['avatar']['error'] == 0)
+        {
+            //Process the upload - once for avatar, and once for full photo
+            $avatar = Upload::upload($_FILES, "/uploads/avatars/", array("jpg", "jpeg", "gif", "png"), $this->user->user_id);
 
-        echo "<pre>";
-        print_r($_FILES);
-        echo "<pre>";
+            if($avatar == 'Invalid file type.') {
+                // return an error
+                Router::redirect("/users/profile/error");
+            }
+            else {
 
-        # Upload the image to the file structure
-        Upload::upload($_FILES, "/uploads/avatars/", array("jpg", "jpeg", "gif", "png"), $this->user->user_id);
+                // Store the avatar link in users table
+                $data = Array("avatar" => $avatar);
+                DB::instance(DB_NAME)->update("users", $data, "WHERE user_id = ".$this->user->user_id);
 
-        //IS THIS WHERE I WOULD RESIZE THE IMAGE? HOW!!!
-        AVATAR_PATH.$this->user->user_id.jpg->resize(200,200);
-        #$this->image->resize(200,200);
+                // Store the photo link in users table
+                $data2 = Array("photo" => "p_".$avatar);
+                DB::instance(DB_NAME)->update("users", $data2, "WHERE user_id = ".$this->user->user_id);
 
-        # array to update the user's avatar destination
-        $data = Array("avatar" => $this->user->user_id.".jpg");
+                // Resize for showing up in posts
+                $imgObj = new Image($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/' . $avatar);
+                $imgObj->resize(300,300);
+                $imgObj->save_image($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/' . "p_".$avatar);
 
-        # Update the users table with the user_id
-        DB::instance(DB_NAME)->update_row("users", $data, "WHERE user_id = '".$this->user->user_id."'");
-        Router::redirect('/users/profile');
+                //Resize photo for standard width, variable height
+                $imgOb = new Image($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/' . $avatar);
+                $imgOb->resize(80,80,"crop");
+                $imgOb->save_image($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/' . $avatar);
+            }
+        }
+        else
+        {
+            // return an error
+            Router::redirect("/users/profile/error");
+        }
 
+        // Redirect back to the profile page
+        router::redirect('/users/profile');
     }
+
 
     public function display_image($avatar = NULL){
 

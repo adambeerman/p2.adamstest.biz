@@ -23,6 +23,16 @@ class practice_controller extends base_controller {
         echo AVATAR_PATH.$this->user->avatar;
         echo "<br>";
         echo $this->user->avatar;
+        echo "<br>";
+
+        echo APP_PATH."uploads/avatars/".$this->user->user_id.".jpg";
+        echo "<br>";
+        $imgObj = new Image(APP_PATH."uploads/avatars/".$this->user->user_id."jpg");
+        $imgObj ->resize(200,200);
+        echo $imgObj ->exists(TRUE);
+        echo "<img src = '".$imgObj."'>";
+
+
         /*
         $imgObj = new Image(APP_PATH.AVATAR_PATH.jpg');
         $imgObj->resize(200, 200);
