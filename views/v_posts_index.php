@@ -46,8 +46,8 @@
         <?php endif; ?>
 
         <div class = "faded" style = "text-align: right">
-            <time datetime="<?=Time::display($post['modified'],'m/d/y g:i A')?>" >
-                <?=Time::display($post['modified'], 'm/d/y g:i A')?>
+            <time datetime="<?=Time::display($post['created'],'m/d/y g:i A')?>" >
+                <?=Time::display($post['created'], 'm/d/y g:i A')?>
             </time>
         </div>
 

@@ -57,7 +57,7 @@ class posts_controller extends base_controller {
             INNER JOIN users ON posts.user_id = users.user_id
             INNER JOIN users_users ON posts.user_id = users_users.user_id_followed
             WHERE users_users.user_id = ".$this->user->user_id."
-             ORDER BY modified DESC";
+             ORDER BY created DESC";
 
         # Run the query
         $posts = DB::instance(DB_NAME)->select_rows($q);
@@ -119,7 +119,7 @@ class posts_controller extends base_controller {
         $q = "SELECT posts.*
                 FROM posts
                 WHERE user_id = ".$this->user->user_id.
-                " ORDER BY modified DESC";
+                " ORDER BY created DESC";
 
         # Run the query
         $posts = DB::instance(DB_NAME)->select_rows($q);
