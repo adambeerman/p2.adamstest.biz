@@ -5,7 +5,6 @@
     <?php
 
     //Display different error codes for different login issues
-
     switch($error) {
         case 1: echo "Please enter a valid e-mail address";
             break;
@@ -19,9 +18,6 @@
             break;
     }?>
     </div>
-
-
-
 <?php endif; ?>
 
 <form method='POST' action='/users/p_signup'>

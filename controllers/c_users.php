@@ -10,7 +10,7 @@ class users_controller extends base_controller {
 
     public function index() {
 
-    }
+    } # End of Method
 
     public function signup($error = NULL) {
 
@@ -24,31 +24,37 @@ class users_controller extends base_controller {
         # Render template
         echo $this->template;
 
-    }
+    } # End of Method
 
     public function p_signup() {
 
-        # Validate that the user has entered a valid login name
+        ## Validate that the user has entered a valid login name
         $at_sign = strpos($_POST['email'], '@');
+
+        # Error code 1 indicates invalid login name
         if($at_sign === false) {
             Router::redirect('/users/signup/1');
         }
 
-        # if the email has already been created, then alert the person signing up
+        ## if the email has already been created, then alert the person signing up
         $email = $_POST['email'];
         $q = "SELECT created FROM users WHERE email = '".$email."'";
         $emailexists = DB::instance(DB_NAME)->select_field($q);
 
+        # Error code 2 indicates that user already exists
         if(isset($emailexists)){
             Router::redirect('/users/signup/2');
         }
 
-        // Ensure that the user has entered a first name
+        ## Ensure that the user has entered a first name
+
+        # Error code 3 indicates that user needs a first name
         if(strlen($_POST['first_name'])<1){
             Router::redirect('/users/signup/3');
         }
 
-        // Ensure password is greater than 5 characters
+        ## Ensure password is greater than 5 characters
+        # Error code 4 indicates that password is too short
         if(strlen($_POST['password'])<6) {
             Router::redirect('/users/signup/4');
         }
@@ -71,18 +77,11 @@ class users_controller extends base_controller {
         # Insert this user into the database
         $user_id = DB::instance(DB_NAME)->insert('users', $_POST);
 
-        # For now, just confirm they've signed up -
-        # You should eventually make a proper View for this
-        # [TO DO!!!]
-        //echo 'You\'re signed up';
-
-        // Redirect to login page?
+        # Redirect to the login page, and inform them that they have signed up
+        # Currently using $error = 2 as the indication that they have signed up
         Router::redirect('/users/login/2');
 
-        // Dump the $_POST data to see what was submitted
-        // print_r($_POST);
-
-    }
+    } # End of Method
 
     public function login($error = NULL) {
 
@@ -95,7 +94,8 @@ class users_controller extends base_controller {
 
         # Render template
         echo $this->template;
-    }
+
+    } # End of Method
 
     public function p_login() {
 
@@ -119,21 +119,20 @@ class users_controller extends base_controller {
         if(!$token) {
 
             # Send them back to the login page
+            # Error code 1 indicates that they have incorrect login credentials
             Router::redirect("/users/login/1");
 
-            # But if we did, login succeeded!
-        } else {
+        }
+        # But if we did, login succeeded!
+        else {
 
-            /*
-            Store this token in a cookie using setcookie()
-            */
+            # Store this token in a cookie using setcookie()
             setcookie("token", $token, strtotime('+1 year'), '/', false);
 
             # Send them to the main page
             Router::redirect('/users/profile');
         }
-
-    }
+    } # End of Method
 
     public function logout() {
         # Generate and save a new token for next login
@@ -151,11 +150,15 @@ class users_controller extends base_controller {
 
         # Send them back to the main index.
         Router::redirect("/");
-    }
+
+    } # End of Method
 
     public function profile($error = NULL) {
 
-        # Create a new View instance
+        # Make sure user is logged in if they want to use anything in this controller
+        if(!$this->user) {
+            Router::redirect('/users/login');
+        }
 
         # Setup view
         $this->template->content = View::instance('v_users_profile');
@@ -165,7 +168,6 @@ class users_controller extends base_controller {
         $this->template->error = $error;
 
         //Following block is specific to importing the user's own posts to profile page
-
 
             # Build the query (same query as posts/personal/)
             $q = "SELECT posts.*
@@ -178,18 +180,19 @@ class users_controller extends base_controller {
 
             # Pass data to the View
             $this->template->content->posts = $posts;
+
         // END IMPORT BLOCK
 
         # Render template
         echo $this->template;
 
-    }
+    } # End of Method
 
     public function p_upload() {
         // if user specified a new image file, upload it
         if ($_FILES['avatar']['error'] == 0)
         {
-            //Process the upload - once for avatar, and once for full photo
+            //Process the upload of the avatar
             $avatar = Upload::upload($_FILES, "/uploads/avatars/", array("jpg", "jpeg", "gif", "png"), $this->user->user_id);
 
             if($avatar == 'Invalid file type.') {
@@ -206,12 +209,12 @@ class users_controller extends base_controller {
                 $data2 = Array("photo" => "p_".$avatar);
                 DB::instance(DB_NAME)->update("users", $data2, "WHERE user_id = ".$this->user->user_id);
 
-                // Resize for showing up in posts
+                // Resize photo for a user's profile page, and rename as p_avatar
                 $imgObj = new Image($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/' . $avatar);
                 $imgObj->resize(300,300);
                 $imgObj->save_image($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/' . "p_".$avatar);
 
-                //Resize photo for standard width, variable height
+                //Resize avatar image for showing up in posts
                 $imgOb = new Image($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/' . $avatar);
                 $imgOb->resize(80,80,"crop");
                 $imgOb->save_image($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/' . $avatar);
@@ -225,6 +228,7 @@ class users_controller extends base_controller {
 
         // Redirect back to the profile page
         router::redirect('/users/profile');
-    }
+
+    } # End of Method
 
 } # end of the class

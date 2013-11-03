@@ -1,7 +1,3 @@
-<?php if(!isset($user)): ?>
-    <h1>No user specified</h1>
-<?php endif; ?>
-
 <br>
 
 <?php if(isset($error)): ?>
@@ -14,7 +10,8 @@
     <div class = "row-fluid">
         <div class = "span4">
             <?php
-            //Display user photo!
+
+            # Display user photo
             echo "<br><br>";
             echo "<img src = '".AVATAR_PATH.$user->photo."' alt = 'User Photo'";
 
@@ -24,15 +21,11 @@
             <!-- Needs logic to determine whether they need to be asked to update profile -->
 
             <form method='POST' enctype="multipart/form-data" action='/users/p_upload/'>
-
                 <div class = "upload_file_container faded">
                     Change Profile Photo?
                     <input type='file' name='avatar'>
                     <input type='submit'>
                 </div>
-
-
-
             </form>
 
         </div>
@@ -47,6 +40,7 @@
                     <?php foreach($posts as $post): ?>
 
                         <article>
+
                             <!-- Give the option to delete if this was your post -->
                             <div class = "row-fluid">
                                 <div class = "span8" >
@@ -65,6 +59,7 @@
                                 </div>
                             </div>
 
+                            <!-- Display time stamp when post was created -->
                             <div class = "faded text-right">
                                 <time datetime="<?=Time::display($post['created'],'m/d/y g:i A')?>" >
                                     <?=Time::display($post['created'], 'm/d/y g:i A')?>
@@ -76,7 +71,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 

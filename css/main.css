@@ -74,6 +74,10 @@ body {
 
 }
 
+.main_body {
+    background: lightgoldenrodyellow;
+}
+
 article {
     border-bottom-color: lightyellow;
     border-bottom-width: 2px;
@@ -107,13 +111,14 @@ h3 {
     margin-top: 0;
     margin-bottom: 0;
 }
-
+h4 {
+    color: darkred;
+}
 /* FOOTER */
 
 #footer {
     background-color: yellow;
     border-top: 1px black solid;
-    height: 50px;
     color: black;
     border-radius: 0 0 5px 5px;
 }

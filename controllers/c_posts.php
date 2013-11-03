@@ -5,12 +5,9 @@ class posts_controller extends base_controller {
     public function __construct() {
         parent::__construct();
 
-        // Prove to myself tha the __construct() function was called
-        // echo "users_controller construct called<br><br>";
-
         # Make sure user is logged in if they want to use anything in this controller
         if(!$this->user) {
-            die("Members only. <a href='/users/login'>Login</a>");
+            Router::redirect('/users/login');
         }
     }
 
@@ -18,7 +15,7 @@ class posts_controller extends base_controller {
 
         # Set up the View
         $this->template->content = View::instance('v_posts_index');
-        $this->template->title   = "Posts";
+        $this->template->title   = "All Posts";
 
         # Build the query
         $q = "SELECT
@@ -39,13 +36,13 @@ class posts_controller extends base_controller {
         # Render the View
         echo $this->template;
 
-    }
+    } # End of Method
 
     public function following() {
 
         # Set up the View
         $this->template->content = View::instance('v_posts_index');
-        $this->template->title   = "Posts";
+        $this->template->title   = "Friends' Posts";
 
         # Build the query to only choose those posts from users that you're following
         $q = "SELECT
@@ -68,13 +65,13 @@ class posts_controller extends base_controller {
         # Render the View
         echo $this->template;
 
-    }
+    } # End of Method
 
     public function add($error = NULL) {
 
         # Setup view
         $this->template->content = View::instance('v_posts_add');
-        $this->template->title   = "New Post";
+        $this->template->title   = $this->user->first_name." - New Post";
 
         #Pass in any error information
         $this->template->content->error = $error;
@@ -82,10 +79,14 @@ class posts_controller extends base_controller {
         # Render template
         echo $this->template;
 
-    }
+    } # End of Method
 
     public function p_add() {
 
+        # Sanitize the content of the new post
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
+        # Have user try again if their post content was empty.
         if (strlen($_POST['content'])<1) {
             Router::redirect('/posts/add/error');
         }
@@ -104,13 +105,56 @@ class posts_controller extends base_controller {
         # Send user to their list of personal posts
         Router::redirect('/users/profile');
 
-    }
+    } # End of Method
+
+    public function edit_post($post_id = NULL) {
+
+        # Setup view
+        $this->template->content = View::instance('v_posts_add');
+        $this->template->title   = $this->user->first_name." - Edit Post";
+
+        # Find the original post
+        $q = "SELECT posts.content
+                FROM posts
+                WHERE post_id = ".$post_id;
+
+        # Select original post from the database
+        $post = DB::instance(DB_NAME)->select_field($q);
+
+        #Pass the post content to the view
+        $this->template->content->post = $post;
+
+        #Pass in post_id information
+        $this->template->content->post_id = $post_id;
+
+        # Render template
+        echo $this->template;
+
+    } # End of Method
+
+    public function p_edit($post_id = NULL) {
+
+        # Associate this post with this user
+        $_POST['user_id']  = $this->user->user_id;
+
+        # Unix timestamp to update when the field was modified
+        $_POST['modified'] = Time::now();
+
+        # Generation the where condition, where the post_id matches
+        $where_condition = "WHERE posts.post_id = ".$post_id;
+
+        # Edit the entry in the database
+        DB::instance(DB_NAME)->update_row('posts', $_POST, $where_condition);
+
+        # Send user to their list of personal posts
+        Router::redirect('/users/profile');
+
+    } # End of Method
 
     public function personal() {
 
         ## Display only posts that match the current user
 
-        # Same structure as the view of all posts
         # Set up the View
         $this->template->content = View::instance('v_posts_index');
         $this->template->title   = $this->user->first_name." ".$this->user->last_name;
@@ -127,81 +171,39 @@ class posts_controller extends base_controller {
         # Pass data to the View
         $this->template->content->posts = $posts;
 
-        # Pass the profile flag
-        $profile_flag = 1;
-        $this->template->content->profile_flag = $profile_flag;
-
         # Render the View
         echo $this->template;
-    }
 
-    public function edit_post($post_id = NULL) {
+    } # End of Method
 
-        # Setup view
-        $this->template->content = View::instance('v_posts_add');
-        $this->template->title   = "Edit Post";
 
-        #Find the original post
-        $q = "SELECT posts.content
-                FROM posts
-                WHERE post_id = ".$post_id;
-
-        $post = DB::instance(DB_NAME)->select_field($q);
-
-        #Pass the post content to the view
-        $this->template->content->post = $post;
-
-        #Pass in post_id information
-        $this->template->content->post_id = $post_id;
-
-        # Render template
-        echo $this->template;
-
-    }
-
-    public function p_edit($post_id = NULL) {
-
-        # Associate this post with this user
-        $_POST['user_id']  = $this->user->user_id;
-
-        # Unix timestamp to update when the field was modified
-        $_POST['modified'] = Time::now();
-
-        $where_condition = "WHERE posts.post_id = ".$post_id;
-
-        # Edit the entry in the database
-        DB::instance(DB_NAME)->update_row('posts', $_POST, $where_condition);
-
-        # Send user to their list of personal posts
-        Router::redirect('/users/profile');
-
-    }
 
     public function delete_post($post_id = NULL){
 
+        # Configure where condition so that post_id is matched
         $where_condition = "WHERE posts.post_id = ".$post_id;
 
-        # Insert into the users_users table
+        # Delete desired entry from the posts table
         DB::instance(DB_NAME)->delete('posts', $where_condition);
 
+        # Reroute user back to his profile page
 
-        # Delete a post if it is yours
         Router::redirect('/users/profile');
-    }
+    } # End of Method
 
     public function users(){
 
         ## Display a list of users who we can follow and unfollow
 
-        # Same structure as the view of all posts
         # Set up the View
         $this->template->content = View::instance("v_posts_users");
-        $this->template->title   = "Users";
+        $this->template->title   = "All ".APP_NAME." Users";
 
         # Generate query of all users
         $q = "SELECT *
                 FROM users";
 
+        # Query the database
         $users = DB::instance(DB_NAME)->select_rows($q);
 
         # Generate query of all the relationships
@@ -210,7 +212,7 @@ class posts_controller extends base_controller {
             FROM users_users
             WHERE user_id = ".$this->user->user_id;
 
-        # Establish the "relationships" variable, indexed to user_id_followed
+        # Establish the "connections" variable, indexed to user_id_followed
         $connections = DB::instance(DB_NAME)->select_array($q,'user_id_followed');
 
         # Pass users and relationships to the views
@@ -219,12 +221,13 @@ class posts_controller extends base_controller {
 
         # Render the view
         echo $this->template;
-    }
+
+    } # End of Method
 
     public function follow($user_id_followed) {
 
-        #with the user_id_followed information given, set the users_users
-        # table to indicate the $this->user is following user_id_followed
+        # with the user_id_followed information given, set the users_users
+        # table to indicate that $this->user is following user_id_followed
 
         # Set up the information that will be inserted to users_users table
 
@@ -239,7 +242,8 @@ class posts_controller extends base_controller {
 
         # Redirect the user back to users page:
         Router::redirect('/posts/users');
-    }
+
+    } # End of Method
 
     public function unfollow($user_id_followed) {
 
@@ -256,5 +260,6 @@ class posts_controller extends base_controller {
         # Redirect the user back to users page:
         Router::redirect('/posts/users');
 
-    }
-}
+    } # End of Method
+
+} # End of Class

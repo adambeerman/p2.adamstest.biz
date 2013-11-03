@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="/css/main.css" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lily+Script+One' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <!-- Controller Specific CSS/JS -->
     <?php if(isset($client_files_head)) echo $client_files_head; ?>
@@ -67,10 +66,8 @@
         <?php endif; ?>
         <br>
     </div>
-    <div style = "background-color: lightgoldenrodyellow">
 
-
-
+    <div class = "main_body">
         <div id = "main_content">
             <?php if(isset($content)) echo $content; ?>
         </div>
@@ -83,6 +80,13 @@
             ~
             <?php if(isset($title)) echo $title; else echo APP_TAGLINE?>
             ~
+            <br>
+            <div class = "faded" >
+                <?=APP_NAME?> is an application for <a href="http://www.extension.harvard.edu/courses/dynamic-web-applications">
+                    Harvard Extension CSci E-15</a> /
+                Instructor: Susan Buck /
+                Built by Adam Beerman
+            </div>
         </div>
 
     </div>

@@ -1,6 +1,3 @@
-<?php if(isset($profile_flag)): ?>
-<?php endif; ?>
-
 <?php foreach($posts as $post): ?>
 
     <article>
@@ -19,13 +16,18 @@
                         <?=$post['content']?>
                     </blockquote>
                 </div>
+
+                <!-- Section to edit / delete posts -->
                 <div class = "span1 edit_post" >
+                    <br><br>
                     <a href = '/posts/edit_post/<?=$post['post_id']?>' ><i class="icon-edit"></i></a>
                 </div>
                 <div class = "span1 delete_post" >
+                    <br><br>
                     <a href = '/posts/delete_post/<?=$post['post_id']?>' ><i class="icon-remove"></i></a>
                 </div>
             </div>
+
         <?php else: ?>
             <div class = "row-fluid">
                 <div class = "span2">
@@ -45,6 +47,7 @@
             </div>
         <?php endif; ?>
 
+        <!-- Display the time stamp when the post was first created -->
         <div class = "faded" style = "text-align: right">
             <time datetime="<?=Time::display($post['created'],'m/d/y g:i A')?>" >
                 <?=Time::display($post['created'], 'm/d/y g:i A')?>

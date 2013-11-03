@@ -1,5 +1,6 @@
 <?php foreach($users as $person):?>
 
+    <!-- Display each users' photo, name, and date joined. And option to follow/unfollow -->
     <div id = "users" class = "row-fluid">
         <div class = "span1">
             <img src = '/uploads/avatars/<?=$person['avatar']?>'>
@@ -24,6 +25,8 @@
                 </a>
             <?php endif ?>
         </div>
+
+        <!-- Display time stamp when the user joined the application -->
         <div class = "span6 text-right">
             <span class = "faded">
             <?php echo "member since ".date('M d Y', $person['created']);?>
@@ -31,7 +34,5 @@
         </div>
 
     </div>
-
-
 
 <?php endforeach; ?>
