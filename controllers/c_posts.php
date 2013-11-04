@@ -83,9 +83,8 @@ class posts_controller extends base_controller {
 
     public function p_add() {
 
-        # convert new lines to line breaks, then replace with ". "
+        # convert new lines to line breaks
         $_POST['content']=nl2br($_POST['content']);
-        $_POST['content']=str_replace(['<br>','<br />'],". ",$_POST['content']);
 
         # Have user try again if their post content was empty.
         if (strlen($_POST['content'])<1) {
