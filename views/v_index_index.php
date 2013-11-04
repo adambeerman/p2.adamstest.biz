@@ -9,10 +9,15 @@
 </h1>
 
 <h4>
-    <?=APP_NAME?> is a micro-blog that allows you to post your thoughts about the world!
-    And of course, you can edit or delete them, too.
-    See the other <?=APP_NAME?> users once you sign up, and choose whose posts you would like to follow.
-    You can even add a profile picture!
+    <?=APP_NAME?> is a micro-blog that allows you to make posts and follow your friends!
+    <br><br>
+    +1 Features include:
+    <ul>
+        <li>Editing Posts</li>
+        <li>Deleting Posts</li>
+        <li>Uploading a Profile Photo</li>
+    </ul>
+
     <br><br>
     Revenge is a dish best served cold. But <?=APP_NAME?> is hot! We're glad you could join us.
 </h4>

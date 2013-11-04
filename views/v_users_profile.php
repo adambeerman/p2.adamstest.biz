@@ -44,9 +44,7 @@
                             <!-- Give the option to delete if this was your post -->
                             <div class = "row-fluid">
                                 <div class = "span8" >
-                                    <blockquote>
-                                        <?=$post['content']?>
-                                    </blockquote>
+                                    <blockquote><?=$post['content']?></blockquote>
                                 </div>
                                 <div class = "span2">
 

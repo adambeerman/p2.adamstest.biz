@@ -12,9 +12,7 @@
                     <?php if($post['first_name']): ?>
                         <h4><?=$post['first_name']?> <?=$post['last_name']?>:</h4>
                     <?php endif; ?>
-                    <blockquote>
-                        <?=$post['content']?>
-                    </blockquote>
+                    <blockquote><?=$post['content']?></blockquote>
                 </div>
 
                 <!-- Section to edit / delete posts -->
@@ -37,9 +35,7 @@
                     <?php if($post['first_name']): ?>
                         <h4><?=$post['first_name']?> <?=$post['last_name']?>:</h4>
                     <?php endif; ?>
-                    <blockquote class = "other_user">
-                        <?=$post['content']?>
-                    </blockquote>
+                    <blockquote class = "other_user"><?=$post['content']?></blockquote>
                 </div>
                 <div class="span2">
 
