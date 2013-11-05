@@ -12,7 +12,7 @@
 }
 
 #menu {
-    background-color: yellow;
+    background-color: #F7F74A;
     border-bottom: 1px solid black;
     margin: 0 auto;
     padding: 15px;
@@ -117,7 +117,7 @@ h4 {
 /* FOOTER */
 
 #footer {
-    background-color: yellow;
+    background-color: #F7F74A;
     border-top: 1px black solid;
     color: black;
     border-radius: 0 0 5px 5px;
@@ -154,7 +154,7 @@ blockquote.other_user {
 }
 
 .edit_post a:hover {
-    background-color: yellow;
+    background-color: #F7F74A;
 }
 
 #menu ul li:hover {
