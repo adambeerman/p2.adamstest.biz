@@ -60,8 +60,8 @@ class users_controller extends base_controller {
         }
 
         # Give user the default avatar and profile photo
-        $_POST['avatar'] = "example.gif";
-        $_POST['photo'] = "p_example.gif";
+        $_POST['avatar'] = "example.jpg";
+        $_POST['photo'] = "p_example.jpg";
 
 
         # Store time stamp data from user

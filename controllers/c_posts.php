@@ -85,6 +85,7 @@ class posts_controller extends base_controller {
 
         # convert new lines to line breaks
         $_POST['content']=nl2br($_POST['content']);
+        $_POST['content']=htmlspecialchars($_POST['content']);
 
         # Have user try again if their post content was empty.
         if (strlen($_POST['content'])<1) {
@@ -179,6 +180,13 @@ class posts_controller extends base_controller {
 
 
     public function delete_post($post_id = NULL){
+
+        ## Need condition to not allow a user to delete other users' posts
+        /*$q = "SELECT user_id
+            FROM posts
+            WHERE post_id = ".$this->user->user_id;
+
+        $current_user = DB::instance(DB_NAME)->select_row('posts')*/
 
         # Configure where condition so that post_id is matched
         $where_condition = "WHERE posts.post_id = ".$post_id;
